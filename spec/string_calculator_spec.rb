@@ -23,6 +23,18 @@ RSpec.describe StringCalculator, "#add" do
     expect(StringCalculator.add("159,42")).to eq(201)
   end
 
+  it "returns 4002 for string '1558,2,2442'" do
+    expect(StringCalculator.add("1558,2,2442")).to eq(4002)
+  end
+
+  it "returns 6 for string '1\n2,3'" do
+    expect(StringCalculator.add("1\n2,3")).to eq(6)
+  end
+
+  it "returns 7 for string '//;\n2;5'" do
+    expect(StringCalculator.add("//;\n2;5")).to eq(7)
+  end
+
   # more tests go here
 end
 
