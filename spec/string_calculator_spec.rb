@@ -39,6 +39,10 @@ RSpec.describe StringCalculator, "#add" do
     expect(StringCalculator.add("//@\n2@5@3")).to eq(10)
   end
 
+  it "raises an error when string includes one negative ex. '//;\n2;5;-3" do
+    expect { StringCalculator.add("//;\n2;5;-2") }.to raise_error
+  end
+
   # more tests go here
 end
 
