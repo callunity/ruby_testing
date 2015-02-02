@@ -35,6 +35,10 @@ RSpec.describe StringCalculator, "#add" do
     expect(StringCalculator.add("//;\n2;5")).to eq(7)
   end
 
+  it "returns 10 for string '//@\n2@5@3'" do
+    expect(StringCalculator.add("//@\n2@5@3")).to eq(10)
+  end
+
   # more tests go here
 end
 
