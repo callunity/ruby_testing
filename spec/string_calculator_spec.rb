@@ -32,23 +32,27 @@ RSpec.describe StringCalculator, "#add" do
   end
 
   it "returns 7 for string '//;\n2;5'" do
-    expect(StringCalculator.add("//;\n2;5")).to eq(7)
+    expect(StringCalculator.add("//[;]\n2;5")).to eq(7)
   end
 
   it "returns 10 for string '//@\n2@5@3'" do
-    expect(StringCalculator.add("//@\n2@5@3")).to eq(10)
+    expect(StringCalculator.add("//[@]\n2@5@3")).to eq(10)
   end
 
   it "raises an error when string includes one negative ex. '//;\n2;5;-3" do
-    expect { StringCalculator.add("//;\n2;5;-2") }.to raise_error
+    expect { StringCalculator.add("//[;]\n2;5;-2") }.to raise_error
   end
 
   it "raises a custom error when string includes more than one negative '//;\n-2;-3;5'" do
-    expect { StringCalculator.add("//;\n-2;-3;5") }.to raise_error "Cannot handle negative numbers: -2,-3"
+    expect { StringCalculator.add("//[;]\n-2;-3;5") }.to raise_error "Cannot handle negative numbers: -2,-3"
   end
 
-  it "ignores numbers larger than 100 ex. string '//$10$1001$103'" do
-    expect(StringCalculator.add("//$10$1001$103")).to eq(113)
+  it "ignores numbers larger than 100 ex. string '//[$]10$1001$103'" do
+    expect(StringCalculator.add("//[$]10$1001$103")).to eq(113)
+  end
+
+  it "returns 7 for string '//[whyyy]2whyyy5'" do
+    expect(StringCalculator.add("//[whyyy]2whyyy5")).to eq(7)
   end
 
   # more tests go here

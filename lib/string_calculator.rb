@@ -16,8 +16,9 @@ module StringCalculator
   def self.set_delimiter(string)
     delimiter = ","
     if string[0..1] =~ /\/\//
-      delimiter = string[2]
-      string = string[3..-1]
+      delimiter_braces = /\[.+\]/.match(string)
+      delimiter = delimiter_braces.to_s.slice(1..-2)
+      string = string.split("]")[1]
     end
     return delimiter, string
   end
