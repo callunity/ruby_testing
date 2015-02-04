@@ -19,7 +19,7 @@ RSpec.describe StringCalculator, "#add" do
     expect(StringCalculator.add("1,2")).to eq(3)
   end
 
-  it "returns 201 for string '159, 42'" do
+  it "returns 201 for string '159,42'" do
     expect(StringCalculator.add("159,42")).to eq(201)
   end
 
@@ -42,6 +42,12 @@ RSpec.describe StringCalculator, "#add" do
   it "raises an error when string includes one negative ex. '//;\n2;5;-3" do
     expect { StringCalculator.add("//;\n2;5;-2") }.to raise_error
   end
+
+  it "raises a custom error when string includes more than one negative '//;\n-2;-3;5'" do
+    expect { StringCalculator.add("//;\n-2;-3;5") }.to raise_error "Cannot handle negative numbers: -2,-3"
+  end
+
+
 
   # more tests go here
 end
