@@ -2,11 +2,10 @@ module StringCalculator
 
   def self.add(string)
     delimiter, string = self.set_delimiter(string)
-    puts delimiter
     negatives = []
     string.gsub!("\n", delimiter)
-    puts string
-    result = string.split(delimiter).inject(0) do |sum, num|
+    result = string.split(delimiter).map {|num| num if num.length < 4}
+    answer = result.compact.inject(0) do |sum, num|
       negatives << num if num.to_i < 0
       sum += num.to_i
     end
@@ -16,7 +15,7 @@ module StringCalculator
     elsif negatives.length == 1
       raise
     else
-      result
+      answer
     end
   end
 

@@ -24,7 +24,7 @@ RSpec.describe StringCalculator, "#add" do
   end
 
   it "returns 4002 for string '1558,2,2442'" do
-    expect(StringCalculator.add("1558,2,2442")).to eq(4002)
+    expect(StringCalculator.add("1558,2,2442")).to eq(2) #due to elimination of n > 1001 in requirement 9
   end
 
   it "returns 6 for string '1\n2,3'" do
@@ -47,7 +47,9 @@ RSpec.describe StringCalculator, "#add" do
     expect { StringCalculator.add("//;\n-2;-3;5") }.to raise_error "Cannot handle negative numbers: -2,-3"
   end
 
-
+  it "ignores numbers larger than 100 ex. string '//$10$1001$103'" do
+    expect(StringCalculator.add("//$10$1001$103")).to eq(113)
+  end
 
   # more tests go here
 end
