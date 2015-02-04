@@ -9,14 +9,8 @@ module StringCalculator
       negatives << num if num.to_i < 0
       sum += num.to_i
     end
-
-    if negatives.length > 1
-      raise "Cannot handle negative numbers: #{negatives.join(',')}"
-    elsif negatives.length == 1
-      raise
-    else
-      answer
-    end
+    self.check_negatives(negatives)
+    answer
   end
 
   def self.set_delimiter(string)
@@ -26,6 +20,15 @@ module StringCalculator
       string = string[3..-1]
     end
     return delimiter, string
+  end
+
+  def self.check_negatives(negatives)
+    if negatives.length > 1
+      raise "Cannot handle negative numbers: #{negatives.join(',')}"
+    elsif negatives.length == 1
+      raise
+    else
+    end
   end
 
 end
